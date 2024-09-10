@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}Seleccionar Usuario{% endblock %}
+
+{% block content %}
+<form method="post">
+  {% csrf_token %}
+  <label for="usuario">Selecciona un usuario:</label>
+  <select name="usuario" id="usuario">
+    {% for usuario in usuarios %}
+      <option value="{{ usuario }}">{{ usuario }}</option>
+    {% endfor %}
+  </select>
+  <button type="submit">Simular login</button>
+</form>
+{% endblock %}
