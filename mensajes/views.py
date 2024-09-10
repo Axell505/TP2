@@ -41,12 +41,11 @@ class EliminarMensajeView(DeleteView):
     template_name = 'eliminar_mensaje.html'
     success_url = reverse_lazy('listar_mensajes')
 
-class SeleccionarUsuarioView(View):
-    def get(self, request, *args, **kwargs):
-        usuarios = ['Usuario1', 'Usuario2', 'Usuario3']  # Lista de usuarios simulados
-        return render(request, 'seleccionar_usuario.html', {'usuarios': usuarios})
-
-    def post(self, request, *args, **kwargs):
+def seleccionar_usuario(request):
+    if request.method == 'POST':
         usuario = request.POST.get('usuario')
         request.session['usuario'] = usuario
         return redirect('listar_mensajes')
+    else:
+        usuarios = ['Usuario1', 'Usuario2', 'Usuario3']  # Lista de usuarios simulados
+        return render(request, 'seleccionar_usuario.html', {'usuarios': usuarios})
